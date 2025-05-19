@@ -28,13 +28,23 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/systemchecks")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-  }, []);
+  const fetchData = async () => {
+    try {
+      const res = await fetch("/api/sysutil");
+      // eslint-disable-next-line
+      const data: SystemCheck[] = await res.json();
+      setData(data);
+    } catch (error) {
+      console.error("Failed to fetch system checks:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  void fetchData(); // fix for ESLint
+}, []);
+
+
 
   if (loading) {
     return (
