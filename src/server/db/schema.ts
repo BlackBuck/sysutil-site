@@ -6,7 +6,7 @@ export const createTable = singlestoreTableCreator(
 )
 
 export const systemchecks = singlestoreTable('system_checks', {
-  id: int().primaryKey(),
+  id: int().primaryKey().autoincrement(),
   timestamp: datetime("timestamp").notNull(), 
   os_type: text("os_type"), 
   hostname: text("hostname"), 
