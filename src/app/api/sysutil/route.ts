@@ -40,3 +40,15 @@ export async function POST(req: NextRequest) : Promise<NextResponse> {
     );
   }
 }
+
+export async function GET() {
+  try {
+    const data = await db.select().from(systemchecks).orderBy(systemchecks.timestamp);
+    return NextResponse.json(data);
+  } 
+  // eslint-disable-next-line 
+  catch (error: any) {
+    // eslint-disable-next-line
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
