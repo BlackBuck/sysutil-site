@@ -15,3 +15,6 @@ export const systemchecks = singlestoreTable('system_checks', {
   antivirus_info: json().$type<{presence: string; details: string}>(), 
   inactivity_sleep_settings: json().$type<{compliance_status: string; configured_minutes: number}>()
 });
+
+export type systemcheck_type_insert = typeof systemchecks.$inferInsert
+export type systemcheck_type_select = typeof systemchecks.$inferSelect

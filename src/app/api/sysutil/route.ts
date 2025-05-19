@@ -1,19 +1,13 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { db } from "~/server/db";
-import { systemchecks } from "~/server/db/schema"
+import { systemchecks, type systemcheck_type_insert } from "~/server/db/schema"
 
 export async function POST(req: NextRequest) {
-  const {
-    timestamp,
-    os_name,
-    hostname,
-    disk_encryption,
-    os_update_status,
-    antivirus_info,
-    inactivity_sleep_settings,
-  } = await req.json();
 
-  const result = await db.insert(systemchecks).values([timestamp, os_name, hostname, disk_encryption, os_update_status, antivirus_info, inactivity_sleep_settings]);
+  // eslint-disable-next-line
+  const insert_value: systemcheck_type_insert = await req.json();
+  // eslint-disable-next-line
+  const result = await db.insert(systemchecks).values(insert_value);
 
   return NextResponse.json({ success: true, result: result });
 }
