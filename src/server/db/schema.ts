@@ -5,7 +5,7 @@ export const createTable = singlestoreTableCreator(
   (name) => `sysutil_${name}`
 )
 
-export const usersTable = singlestoreTable('users_table', {
+export const systemchecks = singlestoreTable('system_checks', {
   id: int().primaryKey(),
   timestamp: datetime("timestamp").notNull(), 
   os_type: text("os_type"), 
